@@ -1,18 +1,22 @@
 from flask import Flask
+import pyads
 
 from objects.orchestrator import Orchestrator
 from objects.conveyor import Conveyor
 from objects.pallet import Pallet
 
+plc = pyads.Connection('199.4.42.250.1.1', 851)
+plc.open()
+
 app = Flask(__name__)
 
-conveyors = [Conveyor(1), Conveyor(2), Conveyor(3)]
+conveyors = [Conveyor(1, plc), Conveyor(2, plc), Conveyor(3, plc)]
 pallets = [Pallet(1, "Spring")]
 orchestrator = Orchestrator(1, conveyors, pallets)
 
 @app.route('/')
 def hello_world():  # put application's code here
-    return 'Welcome to conveyor system'
+    return f'Welcome to conveyor system {conveyors[0].get_status()} {conveyors[1].get_status()} {conveyors[2].get_status()}'
 
 
 @app.route('/conveyors/<id>', methods=['GET'])
