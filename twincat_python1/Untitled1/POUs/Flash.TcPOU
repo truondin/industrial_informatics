@@ -1,17 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="Flash" Id="{863ef1e9-ff62-412a-a9e7-636748db6f12}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION Flash : BOOL
-VAR_INPUT
-END_VAR
+    <Declaration><![CDATA[FUNCTION_BLOCK Flash
 VAR
-	start: BOOL;
 	ton1: TON;
-	Time1: TIME;
 	ton2: TON;
+END_VAR
+VAR_INPUT
+	bstart: BOOL;
+	Time1: TIME;
 	Time2: TIME;
+END_VAR
+VAR_OUTPUT
 	out: BOOL;
 END_VAR
+
 ]]></Declaration>
     <Implementation>
       <NWL>
@@ -117,7 +120,7 @@ END_VAR
                             <l2 n="InputItems" cet="BoxTreeOperand">
                               <o>
                                 <o n="Operand" t="Operand">
-                                  <v n="Operand">"start"</v>
+                                  <v n="Operand">"bstart"</v>
                                   <v n="Type">"BOOL"</v>
                                   <v n="Comment">""</v>
                                   <v n="SymbolComment">""</v>

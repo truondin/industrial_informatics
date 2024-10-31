@@ -3,6 +3,7 @@
   <DUT Name="Conveyor" Id="{2f4ed8bc-eda6-431d-9129-60af6c5a411c}">
     <Declaration><![CDATA[TYPE Conveyor :
 STRUCT
+	start :  BOOL;
 	status : INT;
 	id : INT;
     red_light_on : BOOL;
@@ -11,6 +12,7 @@ STRUCT
     in_sensor : BOOL;
     out_sensor : BOOL;
     motor_on : BOOL;
+	stop : BOOL;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
