@@ -1,3 +1,4 @@
+from .conveyor import Status
 
 class Orchestrator:
     def __init__(self, id, conveyors, pallets):
@@ -6,14 +7,20 @@ class Orchestrator:
         for conveyor in conveyors:
             self.conveyors[conveyor.id] = conveyor
         self.pallets = pallets
-        self.valid_conveyors_transfer = [(1, 2), (2, 3), (1, 3)]
 
     def transfer_pallet(self, from_id, to_id):
-        if (from_id, to_id) not in self.valid_conveyors_transfer:
+        if from_id > to_id:
             return False
-        if from_id not in self.conveyors.keys() or to_id not in self.conveyors.keys():
-            return False
+
         print("Transfering pallets from", from_id, "to", to_id)
+        for i in (from_id, to_id + 1):
+            conveyor = self.conveyors[i]
+            conveyor.transfer()
+            while conveyor.get_status()["status"] != Status.IDLE.name:
+                print(f"Conveyor {i} waiting")
+
+            # todo set sensor_out = False on i conveyor and set sensor_in = True on i+1 conveyor
+
         return True
 
     def get_conveyor_status(self, conveyor_id):

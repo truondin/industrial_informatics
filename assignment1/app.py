@@ -101,4 +101,7 @@ def transfer_pallet(from_id, to_id):
 
 
 if __name__ == '__main__':
-    app.run()
+    try:
+        app.run()
+    finally:
+        plc.close()

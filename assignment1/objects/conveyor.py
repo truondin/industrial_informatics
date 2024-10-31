@@ -13,16 +13,15 @@ class Conveyor:
         self.id = plc.read_by_name(f'MAIN.conv{id}.id', pyads.PLCTYPE_INT)
 
     def turn_on(self):
-        if self.status == Status.OFF:
-            self.status = Status.IDLE
+        plc.write_by_name(f'MAIN.conv{self.id}.status', Status.IDLE.value, pyads.PLCTYPE_INT)
 
 
     def turn_off(self):
-        if self.status == Status.ON or self.status == Status.IDLE:
-            self.status = Status.OFF
+        plc.write_by_name(f'MAIN.conv{self.id}.status', Status.OFF.value, pyads.PLCTYPE_INT)
 
     def transfer(self):
-        print("Transferring in")
+        #todo maybe change value
+        plc.write_by_name(f'MAIN.conv{self.id}.start', pyads.PLCTYPE_INT)
 
 
     def get_status(self):
