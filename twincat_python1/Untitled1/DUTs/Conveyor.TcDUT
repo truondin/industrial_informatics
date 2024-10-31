@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="Conveyor" Id="{2f4ed8bc-eda6-431d-9129-60af6c5a411c}">
+    <Declaration><![CDATA[TYPE Conveyor :
+STRUCT
+	status : INT;
+	id : INT;
+    red_light_on : BOOL;
+    yellow_light_on : BOOL;
+    green_light_on : BOOL;
+    in_sensor : BOOL;
+    out_sensor : BOOL;
+    motor_on : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
