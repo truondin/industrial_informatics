@@ -7,11 +7,13 @@
     <PouCall>
       <Name>MAIN</Name>
     </PouCall>
+    <PouCall>
+      <Name>conv1_task</Name>
+    </PouCall>
     <TaskFBGuid>{0ab97a00-05d5-46cb-be1b-d357736f3e28}</TaskFBGuid>
     <Fb_init>{f625b96f-ffac-4bc2-81aa-008c8b3a3917}</Fb_init>
     <Fb_exit>{446e57ec-27a8-49f3-9a36-d9e0168041fd}</Fb_exit>
     <CycleUpdate>{94efca4a-871c-4f45-9c0e-f793ca0d5862}</CycleUpdate>
     <PostCycleUpdate>{73c72ae6-27bb-42a2-a9e5-3dc6ef661a98}</PostCycleUpdate>
-    <ObjectProperties />
   </Task>
 </TcPlcObject>

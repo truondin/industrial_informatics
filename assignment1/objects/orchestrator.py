@@ -16,8 +16,9 @@ class Orchestrator:
         for i in (from_id, to_id + 1):
             conveyor = self.conveyors[i]
             conveyor.transfer()
-            while conveyor.get_status()["status"] != Status.IDLE.name:
-                print(f"Conveyor {i} waiting")
+            break
+            # while conveyor.get_status()["status"] != Status.IDLE.name:
+            #     print(f"Conveyor {i} waiting")
 
             # todo set sensor_out = False on i conveyor and set sensor_in = True on i+1 conveyor
 

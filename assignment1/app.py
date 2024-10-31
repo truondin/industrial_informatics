@@ -10,13 +10,14 @@ plc.open()
 
 app = Flask(__name__)
 
-conveyors = [Conveyor(1, plc), Conveyor(2, plc), Conveyor(3, plc)]
+conveyors = [Conveyor(1, plc)]#, Conveyor(2, plc), Conveyor(3, plc)]
 pallets = [Pallet(1, "Spring")]
 orchestrator = Orchestrator(1, conveyors, pallets)
 
 @app.route('/')
 def hello_world():  # put application's code here
     return f'Welcome to conveyor system {conveyors[0].get_status()} {conveyors[1].get_status()} {conveyors[2].get_status()}'
+
 
 
 @app.route('/conveyors/<id>', methods=['GET'])
