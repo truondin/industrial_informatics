@@ -3,88 +3,56 @@
   <POU Name="MAIN" Id="{6d356402-53c3-4c11-804e-d15c2b650fb5}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-
+conv1 : Conveyor := (
+	is_started:=FALSE,
+	status:=0, 
+	id:=1, 
+	red_light_on:=0, 
+	yellow_light_on:=0,
+	green_light_on := 0,
+	in_sensor := 0,
+	out_sensor := 0,
+	motor_on := 0
+);
 
 conv2 : Conveyor := (
-start:=0,
-status:=0, 
-id:=2, 
-red_light_on:=0, 
-yellow_light_on:=0,
-green_light_on := 0,
-in_sensor := 0,
-out_sensor := 0,
-motor_on := 0,
-stop:=0);
+	is_started:=0,
+	status:=0, 
+	id:=2, 
+	red_light_on:=0, 
+	yellow_light_on:=0,
+	green_light_on := 0,
+	in_sensor := 0,
+	out_sensor := 0,
+	motor_on := 0
+);
 
 conv3 : Conveyor := (
-start:=0,
-status:=0, 
-id:=3, 
-red_light_on:=0, 
-yellow_light_on:=0,
-green_light_on := 0,
-in_sensor := 0,
-out_sensor := 0,
-motor_on := 0,
-stop:=0);
+	is_started:=0,
+	status:=0, 
+	id:=3, 
+	red_light_on:=0, 
+	yellow_light_on:=0,
+	green_light_on := 0,
+	in_sensor := 0,
+	out_sensor := 0,
+	motor_on := 0
+);
 
-	fbFlash: Flash;
-	Conv : Conveyor;
-	nSwitchState: INT;
-	light : Conveyor;
-	myVar : BOOL :=FALSE;
-	myVar_prev : BOOL :=FALSE;
-	Count : INT :=0;
-	
+	conv1State: ConvState;
+	conv2State: ConvState;
+	conv3State: ConvState;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF Conv.stop THEN
-	nSwitchState:=1;
-END_IF
+      <ST><![CDATA[conv1State(conv:=conv1);
+conv1 := conv1State.conv;
 
-IF Conv.start AND NOT Conv.motor_on THEN
-	nSwitchState:=2;
-END_IF
+conv2State(conv:=conv2);
+conv2 := conv2State.conv;
 
-IF Conv.start AND Conv.in_sensor THEN
-	nSwitchState:=3;
-END_IF
-
-
-CASE nSwitchState OF
-	1: //red light - stop
-		 fbFlash(bstart:=TRUE, Time1:=T#2S, Time2:=T#1S);
-		 light.red_light_on := fbFlash.out;
-		 conv.motor_on:=FALSE;
-		 Conv.start:=FALSE;
-		 Conv.status:=1;
-		 
-	2: //yellow light - idle
-		 light.yellow_light_on := TRUE;
-		 Conv.status:=2;
-		 
-	3: //green light - running
-		 fbFlash(bstart:=TRUE, Time1:=T#0.5S, Time2:=T#1S);
-		 light.green_light_on := fbFlash.out;
-		 Conv.status:=3;
-		 Conv.motor_on:=TRUE;
-		 
-		 IF myVar AND NOT myVar_prev THEN
-    		Count := Count + 1;  // Increment the counter
-		 END_IF
-		 
-		 myVar_prev := myVar;
-		 
-		 IF Count >= 3 THEN
-			 Conv.out_sensor:= TRUE;
-			 Conv.motor_on:=FALSE;
-			 Conv.in_sensor:= FALSE;
-			 Count := 0;
-		 END_IF
-
-END_CASE]]></ST>
+conv3State(conv:=conv3);
+conv3 := conv3State.conv;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

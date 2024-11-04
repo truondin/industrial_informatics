@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="ConvState" Id="{ef443842-3de1-41fe-8045-d6b23345b6e0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ConvState
+VAR_INPUT
+	conv: Conveyor;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	fbFlash: Flash;
+	Count : INT :=0;
+	prevFlashOut: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF conv.is_started THEN
+	IF conv.in_sensor THEN
+		conv.status := 3;
+	ELSE
+		conv.status := 2;
+	END_IF
+ELSE
+	conv.status := 1;
+END_IF
+
+
+CASE conv.status OF
+	1: //red light - stop
+		 fbFlash(bstart:=TRUE, Time1:=T#2S, Time2:=T#1S);
+		 conv.red_light_on := fbFlash.out;
+		 conv.motor_on:=FALSE;
+		 conv.green_light_on := FALSE;
+		 conv.yellow_light_on := FALSE;
+
+		 
+	2: //yellow light - idle
+		 conv.yellow_light_on := TRUE;
+		 conv.red_light_on := FALSE;
+		 conv.green_light_on := FALSE;
+		 
+	3: //green light - running
+		 fbFlash(bstart:=TRUE, Time1:=T#0.5S, Time2:=T#1S);
+		 conv.green_light_on := fbFlash.out;
+		 conv.red_light_on := FALSE;
+		 conv.yellow_light_on := FALSE;
+		 conv.motor_on:=TRUE;
+		 
+		 IF fbFlash.out AND NOT prevFlashOut THEN
+    		Count := Count + 1;  // Increment the counter
+		 END_IF
+		 
+		 prevFlashOut := fbFlash.out;
+		 
+		 IF Count > 3 THEN
+			 conv.out_sensor:= TRUE;
+			 conv.motor_on:=FALSE;
+			 conv.in_sensor:= FALSE;
+			 Count := 0;
+		 END_IF
+		
+
+END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

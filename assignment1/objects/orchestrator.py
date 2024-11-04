@@ -1,4 +1,5 @@
 from .conveyor import Status
+import time
 
 class Orchestrator:
     def __init__(self, id, conveyors, pallets):
@@ -7,25 +8,30 @@ class Orchestrator:
         for conveyor in conveyors:
             self.conveyors[conveyor.id] = conveyor
         self.pallets = pallets
+        print(len(self.conveyors))
 
     def transfer_pallet(self, from_id, to_id):
         if from_id > to_id:
             return False
 
         print("Transfering pallets from", from_id, "to", to_id)
-        for i in (from_id, to_id + 1):
+        for i in range(from_id, to_id + 1):
+            print(f"iter: {i}")
             conveyor = self.conveyors[i]
             conveyor.transfer()
-            break
-            # while conveyor.get_status()["status"] != Status.IDLE.name:
-            #     print(f"Conveyor {i} waiting")
 
-            # todo set sensor_out = False on i conveyor and set sensor_in = True on i+1 conveyor
+            while conveyor.get_status()["status"] != Status.IDLE.name:
+                print(f"Conveyor {i} running")
+                time.sleep(0.5)
 
+            if i != to_id:
+                print("Removing from conveyor")
+                conveyor.remove_from_conveyor()
         return True
 
     def get_conveyor_status(self, conveyor_id):
-        if conveyor_id in self.conveyors:
+        print(self.conveyors.keys())
+        if conveyor_id in self.conveyors.keys():
             return self.conveyors[conveyor_id].get_status()
         else:
             return None
