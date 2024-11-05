@@ -8,8 +8,8 @@ VAR
 END_VAR
 VAR_INPUT
 	bstart: BOOL;
-	Time1: TIME;
-	Time2: TIME;
+	Time_off: TIME;
+	Time_on: TIME;
 END_VAR
 VAR_OUTPUT
 	out: BOOL;
@@ -175,7 +175,7 @@ END_VAR
                           </o>
                           <o t="BoxTreeOperand">
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"Time1"</v>
+                              <v n="Operand">"Time_off"</v>
                               <v n="Type">"TIME"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
@@ -284,7 +284,7 @@ END_VAR
                         </o>
                         <o>
                           <o n="Operand" t="Operand">
-                            <v n="Operand">"Time2"</v>
+                            <v n="Operand">"Time_on"</v>
                             <v n="Type">"TIME"</v>
                             <v n="Comment">""</v>
                             <v n="SymbolComment">""</v>

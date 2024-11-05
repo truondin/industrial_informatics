@@ -27,7 +27,7 @@ END_IF
 
 CASE conv.status OF
 	1: //red light - stop
-		 fbFlash(bstart:=TRUE, Time1:=T#2S, Time2:=T#1S);
+		 fbFlash(bstart:=TRUE, Time_off:=T#2S, Time_on:=T#1S);
 		 conv.red_light_on := fbFlash.out;
 		 conv.motor_on:=FALSE;
 		 conv.green_light_on := FALSE;
@@ -40,7 +40,7 @@ CASE conv.status OF
 		 conv.green_light_on := FALSE;
 		 
 	3: //green light - running
-		 fbFlash(bstart:=TRUE, Time1:=T#0.5S, Time2:=T#1S);
+		 fbFlash(bstart:=TRUE, Time_off:=T#0.5S, Time_on:=T#1S);
 		 conv.green_light_on := fbFlash.out;
 		 conv.red_light_on := FALSE;
 		 conv.yellow_light_on := FALSE;
