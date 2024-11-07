@@ -2,9 +2,11 @@ from enum import Enum
 import pyads
 
 class Status(Enum):
+    DEFAULT = 0
     OFF = 1
     IDLE = 2
     ON = 3
+    TEST = 4
 
 
 class Conveyor:
@@ -32,4 +34,4 @@ class Conveyor:
 
 
     def test_lights(self):
-        print("Testing lights")
+        self.plc.write_by_name(f'MAIN.conv{self.id}.test_lights', True, pyads.PLCTYPE_BOOL)

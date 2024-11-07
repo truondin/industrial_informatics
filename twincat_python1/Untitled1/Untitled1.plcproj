@@ -28,9 +28,6 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\conv1_task.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\ConvState.TcPOU">
       <SubType>Code</SubType>
     </Compile>

@@ -14,18 +14,32 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF conv.is_started THEN
+      <ST><![CDATA[IF conv.stop THEN
+	conv.status := 1;
+ELSIF conv.test_lights THEN
+	conv.status := 4;
+ELSIF conv.is_started THEN
 	IF conv.in_sensor THEN
 		conv.status := 3;
 	ELSE
 		conv.status := 2;
 	END_IF
 ELSE
-	conv.status := 1;
+	conv.status := 0;
 END_IF
 
 
+
 CASE conv.status OF
+	0: // defined default state
+		conv.green_light_on := FALSE;
+		conv.yellow_light_on := FALSE;
+		conv.red_light_on := FALSE;
+		conv.motor_on := FALSE;
+		conv.in_sensor := FALSE;
+		conv.out_sensor := FALSE;
+			
+
 	1: //red light - stop
 		 fbFlash(bstart:=TRUE, Time_off:=T#2S, Time_on:=T#1S);
 		 conv.red_light_on := fbFlash.out;
@@ -59,6 +73,24 @@ CASE conv.status OF
 			 Count := 0;
 		 END_IF
 		
+	4: //test lights
+		 fbFlash(bstart:=TRUE, Time_off:=T#0.5S, Time_on:=T#1S);
+		 conv.green_light_on := fbFlash.out;
+		 conv.red_light_on := fbFlash.out;
+		 conv.yellow_light_on := fbFlash.out;
+		 conv.motor_on:=FALSE;
+		 
+		 IF fbFlash.out AND NOT prevFlashOut THEN
+    		Count := Count + 1;  // Increment the counter
+		 END_IF
+		 
+		 prevFlashOut := fbFlash.out;
+		 
+		 IF Count > 5 THEN
+			 conv.status := 0;
+			 conv.test_lights:= FALSE;
+			 Count := 0;
+		 END_IF
 
 END_CASE]]></ST>
     </Implementation>

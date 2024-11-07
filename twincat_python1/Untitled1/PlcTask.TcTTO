@@ -5,9 +5,6 @@
     <CycleTime>10000</CycleTime>
     <Priority>20</Priority>
     <PouCall>
-      <Name>conv1_task</Name>
-    </PouCall>
-    <PouCall>
       <Name>MAIN</Name>
     </PouCall>
     <TaskFBGuid>{0ab97a00-05d5-46cb-be1b-d357736f3e28}</TaskFBGuid>
