@@ -12,7 +12,8 @@ conv1 AT %Q* : Conveyor := (
 	green_light_on:=0,
 	in_sensor := 0,
 	out_sensor := 0,
-	motor_on := 0
+	motor_on := 0,
+	transfer := 0
 );
 
 conv2 : Conveyor := (
@@ -24,7 +25,8 @@ conv2 : Conveyor := (
 	green_light_on := 0,
 	in_sensor := 0,
 	out_sensor := 0,
-	motor_on := 0
+	motor_on := 0,
+	transfer := 0
 );
 
 conv3 : Conveyor := (
@@ -36,7 +38,8 @@ conv3 : Conveyor := (
 	green_light_on := 0,
 	in_sensor := 0,
 	out_sensor := 0,
-	motor_on := 0
+	motor_on := 0,
+	transfer := 0
 );
 
 	conv1State: ConvState;
@@ -54,9 +57,5 @@ conv2 := conv2State.conv;
 conv3State(conv:=conv3);
 conv3 := conv3State.conv;]]></ST>
     </Implementation>
-    <LineIds Name="MAIN">
-      <LineId Id="3" Count="6" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

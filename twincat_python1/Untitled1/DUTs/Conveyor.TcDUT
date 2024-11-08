@@ -16,6 +16,7 @@ STRUCT
 	stop : BOOL;
 //	was_stopped : BOOL;
 	test_lights : BOOL;
+	transfer : BOOL;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

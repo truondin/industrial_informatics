@@ -19,7 +19,7 @@ END_VAR
 ELSIF conv.test_lights THEN
 	conv.status := 4;
 ELSIF conv.is_started THEN
-	IF conv.in_sensor THEN
+	IF (conv.in_sensor OR conv.motor_on) AND conv.transfer THEN
 		conv.status := 3;
 	ELSE
 		conv.status := 2;
@@ -36,8 +36,8 @@ CASE conv.status OF
 		conv.yellow_light_on := FALSE;
 		conv.red_light_on := FALSE;
 		conv.motor_on := FALSE;
-		conv.in_sensor := FALSE;
-		conv.out_sensor := FALSE;
+		//conv.in_sensor := FALSE;
+		//conv.out_sensor := FALSE;
 			
 
 	1: //red light - stop
@@ -60,17 +60,8 @@ CASE conv.status OF
 		 conv.yellow_light_on := FALSE;
 		 conv.motor_on:=TRUE;
 		 
-		 IF fbFlash.out AND NOT prevFlashOut THEN
-    		Count := Count + 1;  // Increment the counter
-		 END_IF
-		 
-		 prevFlashOut := fbFlash.out;
-		 
-		 IF Count > 3 THEN
-			 conv.out_sensor:= TRUE;
+		 IF conv.out_sensor THEN
 			 conv.motor_on:=FALSE;
-			 conv.in_sensor:= FALSE;
-			 Count := 0;
 		 END_IF
 		
 	4: //test lights

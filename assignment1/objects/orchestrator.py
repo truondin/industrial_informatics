@@ -18,15 +18,13 @@ class Orchestrator:
         for i in range(from_id, to_id + 1):
             print(f"iter: {i}")
             conveyor = self.conveyors[i]
-            conveyor.transfer()
-
-            while conveyor.get_status()["status"] != Status.IDLE.name:
-                print(f"Conveyor {i} running")
-                time.sleep(0.5)
-
-            if i != to_id:
-                print("Removing from conveyor")
-                conveyor.remove_from_conveyor()
+            time.sleep(5)
+            if conveyor.transfer():
+                while conveyor.get_status()["status"] != Status.IDLE.name:
+                    print(f"Conveyor {i} running")
+                    time.sleep(0.5)
+            else:
+                return False
         return True
 
     def get_conveyor_status(self, conveyor_id):
@@ -63,3 +61,15 @@ class Orchestrator:
             if pallet.id == pallet_id:
                 return pallet.get_status()
         return None
+
+
+    def individual_transfer(self, id):
+        print("Transfering pallet on conveyor", id)
+        conveyor = self.conveyors[id]
+        if conveyor.transfer():
+            while conveyor.get_status()["status"] != Status.IDLE.name:
+                print(f"Conveyor {id} running")
+                time.sleep(0.5)
+            return True
+        else:
+            return False

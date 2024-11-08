@@ -1,7 +1,4 @@
 
-
-
-
 from flask import Flask
 import pyads
 
@@ -9,7 +6,7 @@ from objects.orchestrator import Orchestrator
 from objects.conveyor import Conveyor
 from objects.pallet import Pallet
 
-plc = pyads.Connection('192.168.220.1.1.1', 851)
+plc = pyads.Connection('199.4.42.250.1.1', 851)
 plc.open()
 
 app = Flask(__name__)
@@ -99,6 +96,18 @@ def transfer_pallet(from_id, to_id):
         to_id = int(to_id)
         if orchestrator.transfer_pallet(from_id, to_id):
             return f'Transferring pallet {from_id} to {to_id}', 200
+        else:
+            return "Invalid request", 400
+    except ValueError:
+        return "Invalid IDs", 400
+
+
+@app.route('/transfer/<id>', methods=['POST'])
+def individual_transfer(id):
+    try:
+        id = int(id)
+        if orchestrator.individual_transfer(id):
+            return f'Transferring pallet on conveyor {id}, 200'
         else:
             return "Invalid request", 400
     except ValueError:

@@ -21,9 +21,15 @@ class Conveyor:
     def turn_off(self):
         self.plc.write_by_name(f'MAIN.conv{self.id}.is_started', False, pyads.PLCTYPE_BOOL)
 
+
     def transfer(self):
         #todo maybe change value
-        self.plc.write_by_name(f'MAIN.conv{self.id}.in_sensor', True, pyads.PLCTYPE_BOOL)
+        if self.plc.read_by_name(f'MAIN.conv{self.id}.in_sensor', pyads.PLCTYPE_BOOL):
+            self.plc.write_by_name(f'MAIN.conv{self.id}.transfer', True, pyads.PLCTYPE_BOOL)
+            return True
+        else:
+            return False
+
 
     def remove_from_conveyor(self):
         self.plc.write_by_name(f'MAIN.conv{self.id}.out_sensor', False, pyads.PLCTYPE_BOOL)
