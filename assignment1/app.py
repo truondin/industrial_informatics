@@ -9,7 +9,7 @@ from objects.orchestrator import Orchestrator
 from objects.conveyor import Conveyor
 from objects.pallet import Pallet
 
-plc = pyads.Connection('199.4.42.250.1.1', 851)
+plc = pyads.Connection('192.168.220.1.1.1', 851)
 plc.open()
 
 app = Flask(__name__)
