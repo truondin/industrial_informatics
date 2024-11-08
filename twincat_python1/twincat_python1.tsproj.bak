@@ -2,8 +2,8 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.10">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{ABCFA4A3-29F9-C47D-3187-622ABE93BFD2}" AutoDeleteType="true">Conveyor</Name>
-			<BitSize>112</BitSize>
+			<Name GUID="{DEC4F21B-3374-E6D4-B4C1-AB9E00D2926B}" AutoDeleteType="true">Conveyor</Name>
+			<BitSize>128</BitSize>
 			<SubItem>
 				<Name>is_started</Name>
 				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
@@ -72,6 +72,12 @@
 				<BitSize>8</BitSize>
 				<BitOffs>104</BitOffs>
 			</SubItem>
+			<SubItem>
+				<Name>transfer</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>112</BitOffs>
+			</SubItem>
 		</DataType>
 	</DataTypes>
 	<Project ProjectGUID="{239BF6CF-D377-4A93-8E40-6CAB07D77526}" AmlIdsEnabled="true" TargetNetId="199.4.42.250.1.1" Target64Bit="true" ShowHideConfigurations="#x6">
@@ -84,14 +90,14 @@
 		</System>
 		<Plc>
 			<Project GUID="{0BECCA83-7B42-4589-973A-18829AED62CF}" Name="Untitled1" PrjFilePath="Untitled1\Untitled1.plcproj" TmcFilePath="Untitled1\Untitled1.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{273AD178-8C3E-677D-EEAF-033C9B3988C6}" TmcPath="Untitled1\Untitled1.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{948B121D-D34F-DBEB-539A-9AE16B2E6DF1}" TmcPath="Untitled1\Untitled1.tmc">
 					<Name>Untitled1 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
 						<Var>
 							<Name>MAIN.conv1</Name>
-							<Type GUID="{ABCFA4A3-29F9-C47D-3187-622ABE93BFD2}">Conveyor</Type>
+							<Type GUID="{DEC4F21B-3374-E6D4-B4C1-AB9E00D2926B}">Conveyor</Type>
 						</Var>
 					</Vars>
 					<Contexts>

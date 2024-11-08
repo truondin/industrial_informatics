@@ -62,6 +62,7 @@ CASE conv.status OF
 		 
 		 IF conv.out_sensor THEN
 			 conv.motor_on:=FALSE;
+			 conv.transfer:=FALSE;
 		 END_IF
 		
 	4: //test lights

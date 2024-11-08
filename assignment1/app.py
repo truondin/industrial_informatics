@@ -95,7 +95,7 @@ def transfer_pallet(from_id, to_id):
         from_id = int(from_id)
         to_id = int(to_id)
         if orchestrator.transfer_pallet(from_id, to_id):
-            return f'Transferring pallet {from_id} to {to_id}', 200
+            return f'Transferring pallet from conveyor {from_id} to {to_id}', 200
         else:
             return "Invalid request", 400
     except ValueError:
