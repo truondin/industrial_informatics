@@ -46,6 +46,7 @@ CASE conv.status OF
 		 conv.motor_on:=FALSE;
 		 conv.green_light_on := FALSE;
 		 conv.yellow_light_on := FALSE;
+		 conv.transfer := FALSE;
 
 		 
 	2: //yellow light - idle
