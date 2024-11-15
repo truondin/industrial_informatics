@@ -5,14 +5,12 @@ class Orchestrator:
     def __init__(self, id, conveyors, pallets):
         self.id = id
         self.conveyors = {}
-        for conveyor in conveyors:
-            self.conveyors[conveyor.id] = conveyor
+        self.conveyors = conveyors
         self.pallets = pallets
-        print(len(self.conveyors))
 
     def transfer_pallet(self, from_id, to_id):
         if from_id > to_id:
-            return False
+            return False, "Invalid from and to ids"
 
         print("Transfering pallets from", from_id, "to", to_id)
         for i in range(from_id, to_id + 1):
@@ -20,12 +18,13 @@ class Orchestrator:
             conveyor = self.conveyors[i]
             time.sleep(5)
             if conveyor.transfer():
+                # todo maybe remove polling
                 while conveyor.get_status()["status"] != Status.IDLE.name:
                     print(f"Conveyor {i} running")
                     time.sleep(0.5)
             else:
-                return False
-        return True
+                return False, f"Conveyor {i} missing pallet on in_sensor"
+        return True, "Completed"
 
     def get_conveyor_status(self, conveyor_id):
         print(self.conveyors.keys())
@@ -61,7 +60,6 @@ class Orchestrator:
             if pallet.id == pallet_id:
                 return pallet.get_status()
         return None
-
 
     def individual_transfer(self, id):
         print("Transfering pallet on conveyor", id)

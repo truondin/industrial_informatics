@@ -23,16 +23,11 @@ class Conveyor:
 
 
     def transfer(self):
-        #todo maybe change value
         if self.plc.read_by_name(f'MAIN.conv{self.id}.in_sensor', pyads.PLCTYPE_BOOL):
             self.plc.write_by_name(f'MAIN.conv{self.id}.transfer', True, pyads.PLCTYPE_BOOL)
             return True
         else:
             return False
-
-
-    def remove_from_conveyor(self):
-        self.plc.write_by_name(f'MAIN.conv{self.id}.out_sensor', False, pyads.PLCTYPE_BOOL)
 
     def get_status(self):
         state = Status(self.plc.read_by_name(f'MAIN.conv{self.id}.status', pyads.PLCTYPE_INT))
