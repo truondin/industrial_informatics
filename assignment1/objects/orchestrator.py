@@ -8,9 +8,15 @@ class Orchestrator:
         self.conveyors = conveyors
         self.pallets = pallets
 
+        self.is_working = False
+
     def transfer_pallet(self, from_id, to_id):
+        if self.is_working:
+            return False, "Orchestrator is busy"
+
+        self.is_working = True
         if from_id > to_id:
-            return False, "Invalid from and to ids"
+            return False, "Invalid <from> and <to> ids"
 
         print("Transfering pallets from", from_id, "to", to_id)
         for i in range(from_id, to_id + 1):
@@ -23,7 +29,10 @@ class Orchestrator:
                     print(f"Conveyor {i} running")
                     time.sleep(0.5)
             else:
+                self.is_working = False
                 return False, f"Conveyor {i} missing pallet on in_sensor"
+
+        self.is_working = False
         return True, "Completed"
 
     def get_conveyor_status(self, conveyor_id):

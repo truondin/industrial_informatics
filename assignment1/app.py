@@ -9,7 +9,6 @@ from objects.pallet import Pallet
 
 plc = pyads.Connection('199.4.42.250.1.1', 851)
 plc.open()
-plc = None
 app = Flask(__name__)
 
 conveyors = {
@@ -29,10 +28,11 @@ def hello_world():  # put application's code here
 def get_conveyor_status(id):
     try:
         id = int(id)
-        result = orchestrator.get_conveyor_status(id)
-        if result is None:
+
+        if id not in conveyors.keys():
             return f'Conveyor {id} not found', 404
         else:
+            result = conveyors[id].get_status()
             return result
     except ValueError:
         return "Invalid ID", 400
@@ -42,10 +42,14 @@ def get_conveyor_status(id):
 def turn_on_conveyor(id):
     try:
         id = int(id)
-        if orchestrator.turn_on_conveyor(id):
-            return f'Conveyor {id} turned on', 200
+
+        if id not in conveyors.keys():
+            return f'Conveyor {id} not found', 404
         else:
-            return f'Conveyor {id} not turned on', 200
+            conveyor = conveyors[id]
+            conveyor.turn_on()
+            return f'Conveyor {id} turned on', 200
+
     except ValueError:
         return "Invalid ID", 400
 
@@ -54,10 +58,12 @@ def turn_on_conveyor(id):
 def turn_off_conveyor(id):
     try:
         id = int(id)
-        if orchestrator.turn_off_conveyor(id):
-            return f'Conveyor {id} turned off', 200
+        if id not in conveyors.keys():
+            return f'Conveyor {id} not found', 404
         else:
-            return f'Conveyor {id} not turned off', 200
+            conveyor = conveyors[id]
+            conveyor.turn_off()
+            return f'Conveyor {id} turned off', 200
     except ValueError:
         return "Invalid ID", 400
 
@@ -110,14 +116,13 @@ def transfer_pallet(id):
         return msg, 400
 
 
-
 @app.route('/conveyors/<id>/transfer', methods=['POST'])
 def individual_transfer(id):
     try:
         id = int(id)
         if id in conveyors.keys():
             if conveyors[id].transfer():
-                return f'Transferring pallet on conveyor {id}, 200'
+                return f'Transferring pallet on conveyor {id}', 200
             else:
                 return "Invalid request - conveyor is missing pallet on in_sensor", 400
         else:
