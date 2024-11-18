@@ -20,6 +20,21 @@
               <v n="TextDefault">"Conveyor 3"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
+            <o>
+              <v n="TextID">"574"</v>
+              <v n="TextDefault">"in_sensor"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"150"</v>
+              <v n="TextDefault">"out_sensor"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"925"</v>
+              <v n="TextDefault">"stop"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
           </l>
           <l n="Languages" t="ArrayList" />
           <v n="GuidInit">{d2a8a8bd-269f-420d-9d79-d09f9b3f5aad}</v>

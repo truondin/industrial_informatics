@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <TcLicenseInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2011/11/TcLicenseInfo">
 	<LicenseInfo>
-		<SystemId>{CF4FB3EF-1B1E-BF39-6B72-0A8E719F9F3C}</SystemId>
-		<IssueTime>2024-11-08T12:56:00</IssueTime>
-		<ExpireTime>2024-11-16T00:00:00</ExpireTime>
-		<LicenseKey>b3b00ae9e157cfa20e2f057ce3b655950d76edadfdbe4861b2bce1de6352bf2dda828590bbe02480aebe8c11b6440f2f2e3fa79e07c762905e505338e5a1730e8481342667c4caffc9beedb037390d06d39015a5cae93c90fab305d4e13c016aa1f3daeeb77b93ce01a68bdc28878e7f8b0090eab520c866ff08a03031265ae54a6933de41d39dea78af63b9d9684785b66e53fb9824b3e1c5a6f1b4f465eb0ca86abb1b4d438af1d30f2123983f4aa4111738db998c31d79d9f32b1daebb6292cb725039df177e7ca5c40cc6288b22f4b9197f9329f2e29b040f8b092ab512b807f010aaafcc1708ce93997a708d42de4068ca30f7f58a72fd7332ead33c09d</LicenseKey>
+		<SystemId>{4265750F-9163-A9D5-7C16-C38893479E6B}</SystemId>
+		<IssueTime>2024-11-18T12:49:00</IssueTime>
+		<ExpireTime>2024-11-26T00:00:00</ExpireTime>
+		<LicenseKey>859934c7f6e90a107fbe0c33d18915ecfd637c5663d71e4b3b3c662afe3001c30eb14f60289ba779a361f16f372fbf268477d1ee751d525aceaded525934893c9dc2bf1c9a91819ad2e57e07982e46070b220fe07cd5c32948d7d56ec5cef1544316de3ee2b033708b56445d2111f5c1dc898bea60b41fc619c3006a5e6e0ce118cf7acbe3a3d3cce1fdbd060799d327d674b1a6ecae0ca595bb39b5c448effdbe81c354b1d6b1b29e21a1a911acc38435e712269ecf31d3a999917c939da8679d849bf26e126e3f2dc174d0c33a2567d326149aaf2ee4f1ed1f6152d5455dabb1f200a5abe4eceb9ca11ed3f06d015cfc5442c1b6403244e6ecea609aff7716</LicenseKey>
 		<License>
 			<LicenseId>{4C256767-E6E6-4AF5-BD68-9F7ABAD0C200}</LicenseId>
 			<Name>TC3 ADS</Name>
@@ -19,16 +19,6 @@
 			<LicenseId>{66689887-CCBD-452C-AC9A-039D997C6E66}</LicenseId>
 			<Name>TC3 PLC</Name>
 			<OrderNo>TC1200</OrderNo>
-		</License>
-		<License>
-			<LicenseId>{A19036CF-A53B-4E3A-99FF-023EF5C4798B}</LicenseId>
-			<Name>TC3 NC PTP Axis</Name>
-			<Instances>10</Instances>
-		</License>
-		<License>
-			<LicenseId>{520DE751-9DB6-47CB-8240-BD5C466E7E64}</LicenseId>
-			<Name>TC3 NC PTP</Name>
-			<OrderNo>TF5000</OrderNo>
 		</License>
 	</LicenseInfo>
 </TcLicenseInfo>
