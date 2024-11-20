@@ -124,7 +124,7 @@ def individual_transfer(id):
             if conveyors[id].transfer():
                 return f'Transferring pallet on conveyor {id}', 200
             else:
-                return "Invalid request - conveyor is missing pallet on in_sensor", 400
+                return f"Invalid request - conveyor {id} is missing pallet on in_sensor", 400
         else:
             return f"Invalid conveyor id - non-existing conveyor with id {id}", 400
     except ValueError:
