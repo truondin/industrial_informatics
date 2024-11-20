@@ -3,11 +3,10 @@ import pyads
 
 class Status(Enum):
     DEFAULT = 0
-    OFF = 1
+    STOP = 1
     IDLE = 2
-    ON = 3
-    TEST = 4
-
+    TRANSFERRING = 3
+    TESTING_LIGHTS = 4
 
 class Conveyor:
     def __init__(self, id, plc):
